@@ -66,11 +66,57 @@ function App() {
 
   return (
     <motion.div style={styles.page} initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ duration: 0.8 }}>
-      <div style={styles.nav}>...</div>
+      <div style={styles.nav}>
+        <button onClick={toggleDarkMode} style={styles.navButton}>
+          {darkMode ? <Sun size={16} /> : <Moon size={16} />} {darkMode ? 'Light' : 'Dark'}
+        </button>
+        <button onClick={jumpToToday} style={styles.navButton}>
+          <Calendar size={16} /> Today
+        </button>
+      </div>
       <h1 style={{ fontSize: 22, marginBottom: 16 }}>Kettlebell Logbook</h1>
-      <AnimatePresence>...</AnimatePresence>
+      <AnimatePresence>
+        {showToast && (
+          <motion.div
+            initial={{ opacity: 0, y: -20 }}
+            animate={{ opacity: 1, y: 0 }}
+            exit={{ opacity: 0, y: -20 }}
+            style={{ position: 'fixed', top: 16, left: '50%', transform: 'translateX(-50%)', backgroundColor: colors.accent, color: '#fff', padding: '8px 16px', borderRadius: 10, fontSize: 14 }}
+          >
+            <CheckCircle size={16} /> Saved!
+          </motion.div>
+        )}
+      </AnimatePresence>
       <motion.h2 style={{ fontSize: 18, marginTop: 20 }} initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.2 }}>Weekly Overview</motion.h2>
-      {weeklyOverview.map((entry, idx) => (...))}
+      {weeklyOverview.map((entry, idx) => (
+        <motion.div
+          key={idx}
+          style={styles.overviewCard}
+          whileHover={{ scale: 1.02, backgroundColor: colors.hover }}
+          transition={{ type: 'spring', stiffness: 300 }}
+          onClick={() => setExpandedDay(expandedDay === idx ? null : idx)}
+        >
+          <div style={{ flex: 1, display: 'flex', alignItems: 'center', gap: 8 }}>
+            {entry.icon}
+            <div>
+              <h3 style={{ margin: 0, fontSize: 16 }}>{entry.day}</h3>
+              <p style={{ margin: 0, fontSize: 12, opacity: 0.7 }}>{entry.activity}</p>
+            </div>
+          </div>
+          <motion.div animate={{ rotate: expandedDay === idx ? 90 : 0 }} transition={{ duration: 0.3 }}>
+            <ChevronRight size={16} />
+          </motion.div>
+          {expandedDay === idx && (
+            <motion.div initial={{ height: 0, opacity: 0 }} animate={{ height: 'auto', opacity: 1 }} transition={{ duration: 0.3 }} style={{ width: '100%', marginTop: 10 }}>
+              <ul style={{ paddingLeft: 20 }}>
+                {plan[idx]?.exercises.map((exercise, i) => (
+                  <li key={i} style={{ fontSize: 13, marginBottom: 4 }}>{exercise}</li>
+                ))}
+              </ul>
+            </motion.div>
+          )}
+        </motion.div>
+      ))}
     </motion.div>
   );
 }
