@@ -4,8 +4,8 @@ import { motion, AnimatePresence } from 'framer-motion';
 
 const defaultPlan = [
   { day: 'Day 1 – Strength', exercises: ['Kettlebell Snatch', 'Goblet Squat', 'One-Arm Press', 'Plank with Pull'] },
-  { day: 'Day 2 – Conditioning', exercises: ['Kettlebell Swings', 'Snatch Intervals', 'Goblet Lunges', 'Burpees'] },
-  { day: 'Day 3 – Core & Carries', exercises: ['Front Rack Squats', 'Renegade Rows', 'Suitcase Carry', 'Overhead Walk'] }
+  { day: 'Day 3 – Conditioning', exercises: ['Kettlebell Swings', 'Snatch Intervals', 'Goblet Lunges', 'Burpees'] },
+  { day: 'Day 5 – Core & Carries', exercises: ['Front Rack Squats', 'Renegade Rows', 'Suitcase Carry', 'Overhead Walk'] }
 ];
 
 const weeklyOverview = [
