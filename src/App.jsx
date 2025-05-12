@@ -53,7 +53,12 @@ function App() {
     ? { bg: '#111', text: '#eee', card: '#1a1a1a', input: '#222', border: '#333', accent: '#0a84ff', highlight: '#2a2a2a', hover: '#252525' }
     : { bg: '#fafafa', text: '#111', card: '#fff', input: '#fff', border: '#ccc', accent: '#007aff', highlight: '#f0f0f0', hover: '#e0e0e0' };
 
-  const styles = { ... };
+  const styles = {
+  page: { backgroundColor: colors.bg, color: colors.text, minHeight: '100vh', padding: 16, fontFamily: '-apple-system, BlinkMacSystemFont, Segoe UI, Roboto, Helvetica Neue, sans-serif', maxWidth: 500, margin: '0 auto' },
+  nav: { display: 'flex', justifyContent: 'space-between', marginBottom: 16, alignItems: 'center' },
+  navButton: { backgroundColor: colors.accent, color: '#fff', border: 'none', borderRadius: 8, padding: '6px 10px', fontSize: 14, display: 'flex', alignItems: 'center', gap: 6, cursor: 'pointer' },
+  overviewCard: { backgroundColor: colors.card, borderRadius: 12, padding: 12, marginTop: 12, display: 'flex', alignItems: 'center', gap: 8, cursor: 'pointer', boxShadow: '0 2px 8px rgba(0,0,0,0.05)' }
+};
 
   if (loading) {
     return (
